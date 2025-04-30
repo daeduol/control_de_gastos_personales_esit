@@ -16,7 +16,7 @@ class MainApp extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text('Hello World!'),
-            Text('This is a demo app.'),
+            Text('hola.'),
           ],
           ),
         ),
