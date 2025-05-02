@@ -11,15 +11,15 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       home: Scaffold(
-          body: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text('Hello World!'),
-                  Text('hola.'),
-                ],
-              )
-          )
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text('Hello World!'),
+            Text('hola.'),
+          ],
+          ),
+        ),
       ),
     );
   }
