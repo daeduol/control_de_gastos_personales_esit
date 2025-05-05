@@ -17,28 +17,32 @@ class ExpenseCard extends StatelessWidget {
       elevation: 4,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       child: ListTile(
-      leading: CircleAvatar(
-      radius: 25,
-      backgroundColor: Theme.of(context).colorScheme.primary,
-      child: Padding(
-        padding: const EdgeInsets.all(6),
-        child: FittedBox(
-          child: Text(
-            '\$${expense.amount.toStringAsFixed(2)}',
-            style: const TextStyle(color: Colors.white),
+        leading: CircleAvatar(
+          radius: 25,
+          backgroundColor: Theme.of(context).colorScheme.primary,
+          child: Padding(
+            padding: const EdgeInsets.all(6),
+            child: FittedBox(
+              child: Text(
+                '\$${expense.amount.toStringAsFixed(2)}',
+                style: const TextStyle(color: Colors.white),
+              ),
+            ),
+          ),
+        ),
+        title: Text(
+          expense.title,
+          style: const TextStyle(fontWeight: FontWeight.bold),
+        ),
+        subtitle: Text(formattedDate),
+        trailing: Text(
+          formattedAmount,
+          style: TextStyle(
+            color: Theme.of(context).colorScheme.primary,
+            fontWeight: FontWeight.bold,
           ),
         ),
       ),
-    ),
-    title: Text(
-    expense.title,
-    style: const TextStyle(fontWeight: FontWeight.bold),
-    ),
-    subtitle: Text(formattedDate),
-    trailing: Text(
-    formattedAmount,
-    style: TextStyle(
-    color: Theme.of(context).colorScheme.primary,
-    fontWeight: FontWeight.bold,
-    ),
-    ),
+    );
+  }
+}
