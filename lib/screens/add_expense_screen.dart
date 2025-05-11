@@ -24,7 +24,8 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
         date: _date,
       );
       await ExpenseDatabase.instance.create(newExpense);
-      if (context.mounted) Navigator.of(context).pop();
+      if (!mounted) return;
+      Navigator.of(context).pop();
     }
   }
 
