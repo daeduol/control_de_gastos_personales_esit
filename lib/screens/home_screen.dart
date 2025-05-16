@@ -134,6 +134,19 @@ class _HomeScreenState extends State<HomeScreen> {
                                     },
                                     child: ExpenseCard(
                                       expense: expenses[index],
+                                      onEdit: () async {
+                                        await Navigator.of(
+                                          context,
+                                        ).push(
+                                          MaterialPageRoute(
+                                            builder: (ctx) =>
+                                                AddExpenseScreen(
+                                              expense: expenses[index],
+                                            ),
+                                          ),
+                                        );
+                                        _refreshExpenses();
+                                      },
                                     ),
                                   ),
                             ),

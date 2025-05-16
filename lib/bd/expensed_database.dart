@@ -33,6 +33,7 @@ class ExpenseDatabase {
       CREATE TABLE expenses (
         id $idType,
         title $textType,
+        category $textType,
         amount $realType,
         date $textType
       )
@@ -49,7 +50,7 @@ class ExpenseDatabase {
     final db = await instance.database;
     final maps = await db.query(
       'expenses',
-      columns: ['id', 'title', 'amount', 'date'],
+      columns: ['id', 'title', 'category', 'amount', 'date'],
       where: 'id = ?',
       whereArgs: [id],
     );

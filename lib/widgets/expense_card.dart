@@ -4,13 +4,13 @@ import 'package:intl/intl.dart';
 
 class ExpenseCard extends StatelessWidget {
   final Expense expense;
+  final VoidCallback? onEdit;
 
-  const ExpenseCard({super.key, required this.expense});
+  const ExpenseCard({super.key, required this.expense, this.onEdit});
 
   @override
   Widget build(BuildContext context) {
     final formattedDate = DateFormat.yMMMd().format(expense.date);
-    final formattedAmount = '\$${expense.amount.toStringAsFixed(2)}';
 
     return Card(
       margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
@@ -34,13 +34,28 @@ class ExpenseCard extends StatelessWidget {
           expense.title,
           style: const TextStyle(fontWeight: FontWeight.bold),
         ),
-        subtitle: Text(formattedDate),
-        trailing: Text(
-          formattedAmount,
-          style: TextStyle(
-            color: Theme.of(context).colorScheme.primary,
-            fontWeight: FontWeight.bold,
-          ),
+        subtitle: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text('Categoría: ${expense.category}'),
+            Text(formattedDate),
+          ],
+        ),
+        trailing: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            IconButton(
+              icon: const Icon(Icons.edit),
+              onPressed: onEdit,
+            ),
+            Text(
+              '\$${expense.amount.toStringAsFixed(2)}',
+              style: TextStyle(
+                color: Theme.of(context).colorScheme.primary,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ],
         ),
       ),
     );
