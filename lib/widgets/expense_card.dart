@@ -53,6 +53,7 @@ class ExpenseCard extends StatelessWidget {
               style: TextStyle(
                 color: Theme.of(context).colorScheme.primary,
                 fontWeight: FontWeight.bold,
+                fontSize: 10,
               ),
             ),
           ],

@@ -33,6 +33,7 @@ class Expense {
     return {
       'id': id,
       'title': title,
+      'category': category,
       'amount': amount,
       'date': date.toIso8601String(),
     };

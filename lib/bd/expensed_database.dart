@@ -17,27 +17,27 @@ class ExpenseDatabase {
   Future<Database> _initDB(String filePath) async {
     final dbPath = await getDatabasesPath();
     final path = join(dbPath, filePath);
+
+    // Eliminar la base de datos existente si existe
+    await deleteDatabase(path);
+
     return await openDatabase(
       path,
-      version: 1,
+      version: 1, // Volver a versión 1
       onCreate: _createDB,
     );
   }
 
   Future _createDB(Database db, int version) async {
-    const idType = 'INTEGER PRIMARY KEY AUTOINCREMENT';
-    const textType = 'TEXT NOT NULL';
-    const realType = 'REAL NOT NULL';
-
     await db.execute('''
-      CREATE TABLE expenses (
-        id $idType,
-        title $textType,
-        category $textType,
-        amount $realType,
-        date $textType
-      )
-    ''');
+    CREATE TABLE expenses (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      title TEXT NOT NULL,
+      category TEXT NOT NULL DEFAULT 'Sin categoría',
+      amount REAL NOT NULL,
+      date TEXT NOT NULL
+    )
+  ''');
   }
 
   Future<Expense> create(Expense expense) async {
@@ -61,7 +61,6 @@ class ExpenseDatabase {
       return null;
     }
   }
-
   Future<List<Expense>> readAll() async {
     final db = await instance.database;
     const orderBy = 'date DESC';
@@ -73,7 +72,12 @@ class ExpenseDatabase {
     final db = await instance.database;
     return db.update(
       'expenses',
-      expense.toMap(),
+      {
+        'title': expense.title,
+        'category': expense.category,
+        'amount': expense.amount,
+        'date': expense.date.toIso8601String(),
+      },
       where: 'id = ?',
       whereArgs: [expense.id],
     );
