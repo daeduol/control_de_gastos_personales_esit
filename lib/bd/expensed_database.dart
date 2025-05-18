@@ -18,9 +18,6 @@ class ExpenseDatabase {
     final dbPath = await getDatabasesPath();
     final path = join(dbPath, filePath);
 
-    // Eliminar la base de datos existente si existe
-    await deleteDatabase(path);
-
     return await openDatabase(
       path,
       version: 1, // Volver a versión 1
