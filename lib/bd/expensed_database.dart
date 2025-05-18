@@ -20,8 +20,11 @@ class ExpenseDatabase {
 
     return await openDatabase(
       path,
-      version: 1, // Volver a versión 1
+      version: 1,
       onCreate: _createDB,
+      onConfigure: (db) async {
+        await db.execute('PRAGMA foreign_keys = ON');
+      },
     );
   }
 
